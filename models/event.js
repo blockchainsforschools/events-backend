@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     eventURL: DataTypes.STRING,
     locationID: DataTypes.INTEGER,
-    startTime: DataTypes.TEXT,
-    endtime: DataTypes.TEXT,
+    startTime: DataTypes.DATE,
+    endtime: DataTypes.DATE,
     imgURL: DataTypes.STRING
   }, {});
   Event.associate = function(models) {

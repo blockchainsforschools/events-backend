@@ -18,10 +18,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       startTime: {
-        type: Sequelize.TEXT
+        type: Sequelize.DATE
       },
       endtime: {
-        type: Sequelize.TEXT
+        type: Sequelize.DATE
       },
       imgURL: {
         type: Sequelize.STRING
