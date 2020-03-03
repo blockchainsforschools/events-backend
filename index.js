@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 const session = require("express-session");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const {sequelize} = require("./models");
+const {sequelize} = require("./database/models");
 const sessionStore = new SequelizeStore({db: sequelize});
 
 app.set('trust proxy', 1);
