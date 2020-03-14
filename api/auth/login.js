@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-const {user} = require("../../database/models");
+const {User} = require("../../database/models");
+
 
 router.post("/", async (req, res) => {
-	const findUser = await user.findOne({
+	const findUser = await User.findOne({
 		where: {
 			email: req.body.email
 		}
@@ -20,7 +21,9 @@ router.post("/", async (req, res) => {
 	}
 
 	return res.json({
-		success: false
+		success: false,
+		error: "invalid_credentials",
+		errorMessage: "The credentials provided are invalid. Please try again."
 	});
 
 });
