@@ -14,6 +14,9 @@ module.exports = {
 			eventURL: {
 				type: Sequelize.STRING
 			},
+			locationID: {
+				type: Sequelize.INTEGER
+			},
 			startTime: {
 				type: Sequelize.DATE
 			},
