@@ -10,10 +10,10 @@ router.post("/", async (req, res) => {
 		}
 	});
 
-	if(findUser){
+	if (findUser) {
 		const success = await bcrypt.compare(req.body.password, findUser.password);
 
-		if(success){
+		if (success) {
 			return res.json({
 				success: true
 			});
