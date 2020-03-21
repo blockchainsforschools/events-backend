@@ -1,8 +1,8 @@
 const router = require("express").Router();
 
 router.use("/auth", require("./auth"));
-router.use("/events", require("./routes/events"));
-router.use("/locations", require("./routes/locations"))
+router.use("/events", require("./events"));
+router.use("/locations", require("./locations"))
 
 // Custom error handler for /api route
 router.use((err, req, res, next) => {
