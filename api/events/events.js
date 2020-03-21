@@ -4,7 +4,7 @@ const { Event: Events } = require("../../database/models/events");
 router.get("/", async (req, res) => {
   const events = await Events.findAll({
     where: {
-      endTime: { gt: new Date() }
+      endTime: { gt: new Date().now() }
     }
   });
   Events.associate(events);
