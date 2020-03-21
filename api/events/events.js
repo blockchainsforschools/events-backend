@@ -14,6 +14,18 @@ router.post("/create", async (req, res) => {
     endTime: new Date(req.body.endTime),
     tags: req.body.tags
   });
+
+  if (event) {
+      return res.json({
+          success: true,
+          payload: event
+      });
+  }
+
+  return res.json({
+      error: "event_creation_error",
+      errorMessage: "Event could not be created. Please try again."
+  });
 });
 
 module.exports = router;

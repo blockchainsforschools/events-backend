@@ -11,6 +11,18 @@ router.post("/create", async (req, res) => {
     city: req.body.city,
     state: req.body.state
   });
+
+  if (location) {
+    return res.json({
+      success: true,
+      payload: location
+    });
+  }
+
+  return res.json({
+    error: "location_creation_error",
+    errorMessage: "Location could not be created. Please try again."
+  });
 });
 
 module.exports = router;
