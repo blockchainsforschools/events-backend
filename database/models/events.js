@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
 	}, {});
 	Events.associate = function (models) {
 		// associations can be defined here
-		Events.hasOne(models.Locations, {
+		Events.belongsTo(models.Locations, {
 			through: models.EventLocations,
 			foreignKey: "eventID"
 		});
