@@ -2,7 +2,12 @@ const router = require("express").Router();
 const { Event: Events } = require("../../database/models/events");
 
 router.get("/", async (req, res) => {
-  const findEvents = await Events.findAll();
+  const events = await Events.findAll({
+    where: {
+      endTime: { gt: new Date() }
+    }
+  });
+  Events.associate(events);
 });
 
 router.post("/create", async (req, res) => {
