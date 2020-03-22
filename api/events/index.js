@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
-router.use("/events", require("./events"));
+router.use("/upcoming", require("./upcoming"));
+router.use("/create", require("./create"));
 
 module.exports = router;

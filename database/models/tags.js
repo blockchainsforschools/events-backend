@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
 	}, {});
 	Tags.associate = function (models) {
 		// associations can be defined here
-		Tags.belongsTo(models.Events,{foreignKey: "eventID", targetKey: "id"});
+		Tags.belongsTo(models.Events, {foreignKey: "eventID", targetKey: "id"});
 	};
 	return Tags;
 };
