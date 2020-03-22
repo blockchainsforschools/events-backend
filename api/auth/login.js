@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-const { User: Users } = require("../../database/models");
+const { Users } = require("../../database/models");
 
 router.post("/", async (req, res) => {
   const findUser = await Users.findOne({
