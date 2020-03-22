@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const { Events } = require("../../database/models/events");
+const { Op } = require("sequelize");
 
 router.get("/", async (req, res) => {
   const events = await Events.findAll({
     where: {
-      endTime: { gt: new Date().now() }
+      endTime: { [Op.gt]: new Date().now() } // TODO check if needs Date conversion
     }
   });
   Events.associate(events);
