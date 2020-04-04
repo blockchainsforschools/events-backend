@@ -19,7 +19,7 @@ router.post("/create", async (req, res) => {
       typeof name === "string" &&
       typeof url === "string" &&
       typeof locationId === "number" &&
-      typeof startTime === "string" && // TODO are startTime and endTime of "string" type?
+      typeof startTime === "string" && // Are startTime and endTime of "string" type?
       typeof endTime === "string" &&
       typeof tags === "object"
     )
@@ -65,7 +65,7 @@ router.post("/create", async (req, res) => {
     payload: event,
   });
 
-  // Is this error check necessary if there is an index.js checking for all /api routes?
+  // Is this error response necessary if there is an index.js checking for all /api routes?
   // return res.json({
   // 	success: false,
   // 	error: "event_creation_error",
