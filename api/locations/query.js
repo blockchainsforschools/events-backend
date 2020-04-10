@@ -1,23 +1,40 @@
 const router = require("express").Router();
-const {Locations} = require("./../../database/models");
+const {Locations, Sequelize} = require("./../../database/models");
 
 router.get("/", async (req, res) => {
 	const query = req.query.q || "";
 
-	// TODO Let's add a querying functionality here
-	const locations = await Locations.findAll();
+	const queryWords = query.split(" ").filter(Boolean);
 
-	if (locations) {
-		return res.json({
-			success: true,
-			payload: locations
-		});
-	}
+	const fields = ["name", "streetaddress", "zipcode", "city", "state"];
+
+	const op = Sequelize.Op;
+
+	// Create dynamic AND queries
+	// Find rows where any field contains any of the words in the query
+	const ANDConditions = queryWords.map(word => {
+
+		const wildcard = `%${word}%`;
+		return {
+			[op.or]: fields.map(field => ({
+				[field]: {
+					[op.like]: wildcard
+				}
+			}))
+		}
+
+	});
+
+	const locations = await Locations.findAll({
+		where: {
+			[op.and]: ANDConditions,
+			limit: 10
+		}
+	});
 
 	return res.json({
-		success: false,
-		error: "location_get_all_error",
-		errorMessage: "Locations could not be retrieved. Please try again."
+		success: true,
+		payload: locations
 	});
 });
 
