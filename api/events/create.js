@@ -1,76 +1,72 @@
 const router = require("express").Router();
-const { Tags, Events, EventLocations } = require("./../../database/models");
+const { Tags, Events, Locations, EventLocations } = require("./../../database/models");
+const RefusalError = require("./../../utils/refusalerror");
 
 router.post("/create", async (req, res) => {
-  // TODO add checks to make sure all the POST information is included / valid
-  const name = req.body.name;
-  const url = req.body.url;
-  const locationId = req.body.locationId;
-  const startTime = req.body.startTime;
-  const endTime = req.body.endTime;
-  const tags = req.body.tags;
+	// TODO add checks to make sure all the POST information is included / valid
+	const name = ( req.body.name || "" ).trim();
+	const eventURL = req.body.url || "";
+	const startTime = new Date(req.body.startTime);
+	const endTime = new Date(req.body.endTime);
+	const locationID = req.body.locationID || "";
+	const tags = req.body.tags;
+	const imgURL = req.body.image;
 
-  if (!(name && url && locationId && startTime && endTime && tags)) {
-    // Checks the existence of each request body parameter
-    return Promise.reject("Error: Not all POST information was included!"); // Is it valid to return a rejected Promise?
-  } else if (
-    // Checks the type validity of each request body parameter
-    !(
-      typeof name === "string" &&
-      typeof url === "string" &&
-      typeof locationId === "number" &&
-      typeof startTime === "string" && // Are startTime and endTime of "string" type?
-      typeof endTime === "string" &&
-      typeof tags === "object"
-    )
-  ) {
-    return Promise.reject("Error: Not all POST information are of valid type!"); // Is it valid to return a rejected Promise?
-  }
+	const validTypes = (
+		startTime.getTime() &&
+		endTime.getTime() &&
+		Array.isArray(tags)
+	);
 
-  // Checks if the provided locationId exists
-  EventLocations.count({ where: { locationId: locationId } }).then((count) => {
-    if (count == 0) {
-      return;
-    }
-  });
+	if (! validTypes) {
+		throw new RefusalError("Not all POST information are of the valid type.", "INVALID_TYPES");
+	}
 
-  // Checks if the provided eventURL is unique/already exists
-  Events.count({ where: { eventURL: url } }).then((count) => {
-    if (count != 0) {
-      return;
-    }
-  });
 
-  const event = await Events.create({
-    name: req.body.name,
-    url: req.body.url,
-    locationId: req.body.locationId,
-    startTime: new Date(req.body.startTime),
-    endTime: new Date(req.body.endTime),
-  });
+	// Checks if the provided eventURL is unique/already exists
+	// It'll return an integer which we can
+	const eventUrlExists = await Events.count({ where: { eventURL } });
 
-  // TODO tags need to be added separately after the event object is created
-  // You can get the id of the event currently created using event.id
+	if( eventUrlExists ){
+		throw new RefusalError("That url already belongs to another event", "URL_EXISTS");
+	}
 
-  // Create tags provided by the request body tags parameter and store in the Tags db table
-  for (let tag in req.body.tags) {
-    const addedTag = await Tags.create({
-      eventID: event.id,
-      tag: tag,
-    });
-  }
+	const locationExists = await Locations.count({ where: {id: locationID}});
 
-  return res.json({
-    success: true,
-    payload: event,
-  });
+	if( ! locationExists ){
+		throw new RefusalError("The location provided is not valid.", "INVALID_LOCATION");
+	}
 
-  // Is this error response necessary if there is an index.js checking for all /api routes?
-  // return res.json({
-  // 	success: false,
-  // 	error: "event_creation_error",
-  // 	errorMessage: "Event could not be created. Please try again."
-  // });
+	const event = await Events.create({
+		name,
+		eventURL,
+		imgURL,
+		startTime,
+		endTime
+	});
+
+	const eventID = event.id;
+
+	await EventLocations.create({
+		locationID,
+		eventID
+	})
+
+	// Create tags provided by the request body tags parameter and store in the Tags db table
+	for (let tag in req.body.tags) {
+
+		await Tags.create({
+			eventID,
+			tag
+		});
+
+	}
+
+	return res.json({
+		success: true,
+		payload: event,
+	});
+
 });
 
 module.exports = router;
