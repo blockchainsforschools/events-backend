@@ -7,7 +7,7 @@ const corsOptions = {
 	origin: (origin, callback) => {
 
 		if (
-			! origin ||
+			!origin ||
 			allowedOrigins.includes(origin) ||
 			process.env.NODE_ENV === "development"
 		) {

@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const { Tags, Events, Locations, EventLocations } = require("./../../database/models");
+const {Tags, Events, Locations, EventLocations} = require("./../../database/models");
 const RefusalError = require("./../../utils/refusalerror");
 
 router.post("/create", async (req, res) => {
 	// TODO add checks to make sure all the POST information is included / valid
-	const name = ( req.body.name || "" ).trim();
+	const name = (req.body.name || "").trim();
 	const eventURL = req.body.url || "";
 	const startTime = new Date(req.body.startTime);
 	const endTime = new Date(req.body.endTime);
@@ -18,22 +18,22 @@ router.post("/create", async (req, res) => {
 		Array.isArray(tags)
 	);
 
-	if (! validTypes) {
+	if (!validTypes) {
 		throw new RefusalError("Not all POST information are of the valid type.", "INVALID_TYPES");
 	}
 
 
 	// Checks if the provided eventURL is unique/already exists
 	// It'll return an integer which we can
-	const eventUrlExists = await Events.count({ where: { eventURL } });
+	const eventUrlExists = await Events.count({where: {eventURL}});
 
-	if( eventUrlExists ){
+	if (eventUrlExists) {
 		throw new RefusalError("That url already belongs to another event", "URL_EXISTS");
 	}
 
-	const locationExists = await Locations.count({ where: {id: locationID}});
+	const locationExists = await Locations.count({where: {id: locationID}});
 
-	if( ! locationExists ){
+	if (!locationExists) {
 		throw new RefusalError("The location provided is not valid.", "INVALID_LOCATION");
 	}
 

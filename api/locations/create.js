@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Locations } = require("../../database/models");
+const {Locations} = require("../../database/models");
 
 router.post("/", async (req, res) => {
 	const location = await Locations.create({

@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const RefusalError = require("./../../utils/refusalerror");
 const bcrypt = require("bcrypt");
 const {Users} = require("../../database/models");
 
@@ -13,17 +14,17 @@ router.post("/", async (req, res) => {
 		const success = await bcrypt.compare(req.body.password, findUser.password);
 
 		if (success) {
+
+			req.session.signedIn = true;
+			req.session.userId = findUser.id;
+
 			return res.json({
 				success: true
 			});
 		}
 	}
 
-	return res.json({
-		success: false,
-		error: "invalid_credentials",
-		errorMessage: "The credentials provided are invalid. Please try again."
-	});
+	throw new RefusalError("Those credentials are invalid. Please try again.", "INVALID_CREDENTIALS");
 });
 
 module.exports = router;

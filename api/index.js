@@ -13,14 +13,14 @@ router.use((err, req, res, next) => {
 		// This isn't a server error
 		// We are simply refusing to process the client's request
 		res
-		  .status(403)
-		  .json({
-			  success: false,
-			  error: {
-				  code: err.code,
-				  message: err.message
-			  }
-		  });
+			.status(403)
+			.json({
+				success: false,
+				error: {
+					code: err.code,
+					message: err.message
+				}
+			});
 
 	} else {
 
@@ -30,14 +30,14 @@ router.use((err, req, res, next) => {
 
 		// Tell the client we don't know what happened
 		res
-		  .status(500)
-		  .json({
-			  success: false,
-			  error: {
-				  code: "SERVER_ERROR",
-				  message: "There was an unexpected error processing that request. Let us know if this continues."
-			  }
-		  });
+			.status(500)
+			.json({
+				success: false,
+				error: {
+					code: "SERVER_ERROR",
+					message: "There was an unexpected error processing that request. Let us know if this continues."
+				}
+			});
 
 	}
 
