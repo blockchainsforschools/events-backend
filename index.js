@@ -1,38 +1,38 @@
-const express = require("express");
-const app = express();
-const port = process.env.PORT || 3001;
-const session = require("express-session");
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const {sequelize} = require("./database/models");
-const sessionStore = new SequelizeStore({db: sequelize});
-const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
+require("dotenv").config();
+const cluster = require("cluster");
+const port = Number(process.env.PORT) || 3001;
+const app = require("./app");
 
-app.use(cookieParser(process.env.SESSION_SECRET || "some_secret"));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.set('trust proxy', 1);
+if ( process.env.NODE_ENV === "production" ) {
 
-app.use(session({
-	secret: process.env.SESSION_SECRET || "banana",
-	resave: false,
-	saveUninitialized: false,
-	cookie: {
-		path: "/",
-		maxAge: (1000 * 86400 * 7),
-		httpOnly: true
-	},
-	rolling: true,
-	store: sessionStore
-}));
+	if(cluster.isMaster){
 
-sessionStore.sync();
+		console.log("Running production server. Now Spawning worker processes...");
 
+		const cpuCount = require("os").cpus().length;
 
-app.use("/api", require("./api"));
+		// Create a worker for each CPU
+		for (let i = 0; i < cpuCount; i += 1) {
+			cluster.fork();
+		}
 
-app.listen(port, () => {
-	console.log(`Listening on ${port}`);
-});
+		cluster.on("exit",  (worker) => {
 
-module.exports = app;
+			// Restart the dead process
+			console.log(`Worker ${worker.id} died. Restarting...`);
+			cluster.fork();
+
+		});
+
+	} else {
+
+		// Code to run if we're in a worker process
+		app.listen(port, () => console.log(`Worker ${cluster.worker.id} listening on port ${port}`));
+
+	}
+
+} else {
+
+	app.listen(port, () => console.log(`Listening on port ${port}`));
+
+}
