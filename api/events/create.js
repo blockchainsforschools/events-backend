@@ -64,13 +64,6 @@ router.post("/create", async (req, res) => {
     success: true,
     payload: event,
   });
-
-  // Is this error response necessary if there is an index.js checking for all /api routes?
-  // return res.json({
-  // 	success: false,
-  // 	error: "event_creation_error",
-  // 	errorMessage: "Event could not be created. Please try again."
-  // });
 });
 
 module.exports = router;
