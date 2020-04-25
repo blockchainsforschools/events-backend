@@ -16,7 +16,6 @@ describe("POST /api/events/create", function () {
             .send(event)
             .set("Accept", "application", /json/)
             .expect(function (res) {
-				console.log(res);
                 assert.equal(res.body.success, true);
             })
             .end(function (err, res) {
