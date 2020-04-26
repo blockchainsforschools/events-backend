@@ -2,7 +2,7 @@ const router = require("express").Router();
 const {Tags, Events, Locations, EventLocations} = require("./../../database/models");
 const RefusalError = require("./../../utils/refusalerror");
 
-router.post("/create", async (req, res) => {
+router.post("/", async (req, res) => {
 	// TODO add checks to make sure all the POST information is included / valid
 	const name = (req.body.name || "").trim();
 	const eventURL = req.body.url || "";
