@@ -24,3 +24,6 @@ describe("POST /api/events/create", function () {
             });
     });
 });
+
+// test refusalerrors with 403 error code
+// test invalid inputs
