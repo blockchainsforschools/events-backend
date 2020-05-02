@@ -62,7 +62,7 @@ router.post("/", async (req, res) => {
 
 	}
 
-	return res.json({
+	res.json({
 		success: true,
 		payload: event,
 	});
