@@ -27,9 +27,9 @@ router.get("/", async (req, res) => {
 
 	const locations = await Locations.findAll({
 		where: {
-			[op.and]: ANDConditions,
-			limit: 10
-		}
+			[op.and]: ANDConditions
+		},
+		limit: 10
 	});
 
 	return res.json({
