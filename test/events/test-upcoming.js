@@ -10,7 +10,7 @@ describe('GET /api/events/upcoming', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .expect((res) => {
-        assert.equal(res.body.success, true);
+        assert.strictEqual(res.body.success, true);
       })
       .end((err, res) => {
         if (err) done(err);
