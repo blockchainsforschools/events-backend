@@ -1,5 +1,5 @@
 const supertest = require("supertest");
-const app = require("./../app");
+const app = require("./../../app");
 const assert = require("assert");
 
 describe("POST /api/events/create", function () {
