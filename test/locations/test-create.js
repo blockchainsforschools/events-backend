@@ -3,7 +3,7 @@ const app = require("./../../app");
 const assert = require("assert");
 
 describe("POST /api/locations/create", function () {
-    const location = {
+    const location1 = {
         name: "Stuyvesant High School",
         address: "345 Chambers Street",
         zip: 10282,
@@ -13,7 +13,7 @@ describe("POST /api/locations/create", function () {
     it("complete body responds with 200 success true", function (done) {
         supertest(app)
             .post("/api/locations/create")
-            .send(location)
+            .send(location1)
             .set("Accept", "application", /json/)
             .expect(200)
             .expect(function (res) {
@@ -24,16 +24,13 @@ describe("POST /api/locations/create", function () {
                 return done();
             });
     });
-});
-
-describe("POST /api/locations/create", function () {
-    const location = {
+    const location2 = {
         address: "345 Chambers Street"
     };
     it("incomplete body responds with 403 success false", function (done) {
         supertest(app)
             .post("/api/locations/create")
-            .send(location)
+            .send(location2)
             .set("Accept", "application", /json/)
             .expect(403)
             .expect(function (res) {
