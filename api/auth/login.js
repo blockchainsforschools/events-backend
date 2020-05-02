@@ -1,11 +1,14 @@
 const router = require("express").Router();
 const RefusalError = require("./../../utils/refusalerror");
 const bcrypt = require("bcrypt");
-const {Users} = require("../../database/models");
+const { Users } = require("../../database/models");
 
 router.post("/", async (req, res) => {
 	if (!req.body.email || !req.body.password) {
-		throw new RefusalError("Not all required POST body information was provided.", "INCOMPLETE_BODY");
+		throw new RefusalError(
+			"Not all required POST body information was provided.",
+			"INCOMPLETE_BODY"
+		);
 	}
 
 	const findUser = await Users.findOne({
@@ -15,10 +18,12 @@ router.post("/", async (req, res) => {
 	});
 
 	if (findUser) {
-		const success = await bcrypt.compare(req.body.password, findUser.password);
+		const success = await bcrypt.compare(
+			req.body.password,
+			findUser.password
+		);
 
 		if (success) {
-
 			req.session.signedIn = true;
 			req.session.userId = findUser.id;
 
@@ -28,7 +33,10 @@ router.post("/", async (req, res) => {
 		}
 	}
 
-	throw new RefusalError("Those credentials are invalid. Please try again.", "INVALID_CREDENTIALS");
+	throw new RefusalError(
+		"Those credentials are invalid. Please try again.",
+		"INVALID_CREDENTIALS"
+	);
 });
 
 module.exports = router;

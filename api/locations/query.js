@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const {Locations, Sequelize} = require("./../../database/models");
+const { Locations, Sequelize } = require("./../../database/models");
 
 router.get("/", async (req, res) => {
 	const query = req.query.q || "";
@@ -13,7 +13,6 @@ router.get("/", async (req, res) => {
 	// Create dynamic AND queries
 	// Find rows where any field contains any of the words in the query
 	const ANDConditions = queryWords.map(word => {
-
 		const wildcard = `%${word}%`;
 		return {
 			[op.or]: fields.map(field => ({
@@ -21,15 +20,14 @@ router.get("/", async (req, res) => {
 					[op.like]: wildcard
 				}
 			}))
-		}
-
+		};
 	});
 
 	const locations = await Locations.findAll({
 		where: {
-			[op.and]: ANDConditions,
-			limit: 10
-		}
+			[op.and]: ANDConditions
+		},
+		limit: 10
 	});
 
 	return res.json({

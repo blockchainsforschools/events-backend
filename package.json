@@ -1,41 +1,50 @@
 {
-  "name": "events-backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "bcrypt": "^4.0.1",
-    "body-parser": "latest",
-    "connect-session-sequelize": "^6.1.1",
-    "cookie-parser": "^1.4.5",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-async-errors": "^3.1.1",
-    "express-session": "^1.17.0",
-    "google-auth-library": "^6.0.0",
-    "sequelize": "^5.21.5"
-  },
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^7.1.1",
-    "sequelize-cli": "^5.5.1",
-    "sqlite3": "^4.1.1",
-    "supertest": "^4.0.2"
-  },
-  "scripts": {
-    "test": "find ./test -name 'test-*.js' | xargs mocha -R spec",
-    "start": "node index.js",
-    "dev": "npx nodemon index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/blockchainsforschools/events-backend.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/blockchainsforschools/events-backend/issues"
-  },
-  "homepage": "https://github.com/blockchainsforschools/events-backend#readme"
+	"name": "events-backend",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"dependencies": {
+		"bcrypt": "^4.0.1",
+		"body-parser": "latest",
+		"connect-session-sequelize": "^6.1.1",
+		"cookie-parser": "^1.4.5",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"express-async-errors": "^3.1.1",
+		"express-session": "^1.17.1",
+		"google-auth-library": "^6.0.0",
+		"sequelize": "^5.21.7"
+	},
+	"devDependencies": {
+		"chai": "^4.2.0",
+		"mocha": "^7.1.2",
+		"nodemon": "^2.0.3",
+		"prettier": "^2.0.5",
+		"sequelize-cli": "^5.5.1",
+		"sqlite3": "^4.2.0",
+		"supertest": "^4.0.2"
+	},
+	"scripts": {
+		"test": "find ./test -name 'test-*.js' | xargs mocha -R spec",
+		"start": "node index.js",
+		"dev": "npx nodemon index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/blockchainsforschools/events-backend.git"
+	},
+	"author": "",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/blockchainsforschools/events-backend/issues"
+	},
+	"homepage": "https://github.com/blockchainsforschools/events-backend#readme",
+	"prettier": {
+		"printWidth": 80,
+		"arrowParens": "avoid",
+		"trailingComma": "none",
+		"useTabs": true,
+		"tabWidth": 4
+	}
 }
