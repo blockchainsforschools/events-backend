@@ -10,11 +10,12 @@ describe("POST /api/locations/create", function () {
         city: "New York",
         state: "NY",
     };
-    it("responds with json success true", function (done) {
+    it("complete body responds with 200 success true", function (done) {
         supertest(app)
             .post("/api/locations/create")
             .send(location)
             .set("Accept", "application", /json/)
+            .expect(200)
             .expect(function (res) {
                 assert.equal(res.body.success, true);
             })
@@ -27,17 +28,17 @@ describe("POST /api/locations/create", function () {
 
 describe("POST /api/locations/create", function () {
     const location = {
-        address: "345 Chambers Street",
-        zip: 10282,
-        city: "New York",
-        state: "NY",
+        address: "345 Chambers Street"
     };
-    it("incomplete body responds with 403", function (done) {
+    it("incomplete body responds with 403 success false", function (done) {
         supertest(app)
             .post("/api/locations/create")
             .send(location)
             .set("Accept", "application", /json/)
             .expect(403)
+            .expect(function (res) {
+                assert.equal(res.body.success, false);
+            })
             .end(function (err, res) {
                 if (err) return done(err);
                 return done();
