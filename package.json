@@ -14,6 +14,8 @@
 		"express-async-errors": "^3.1.1",
 		"express-session": "^1.17.1",
 		"google-auth-library": "^6.0.0",
+		"pg": "^8.0.3",
+		"pg-native": "^3.0.0",
 		"sequelize": "^5.21.7"
 	},
 	"devDependencies": {
@@ -26,7 +28,7 @@
 		"supertest": "^4.0.2"
 	},
 	"scripts": {
-		"test": "find ./test -name 'test-*.js' | xargs mocha -R spec",
+		"test": "mocha",
 		"start": "node index.js",
 		"dev": "npx nodemon index.js"
 	},
@@ -46,5 +48,10 @@
 		"trailingComma": "none",
 		"useTabs": true,
 		"tabWidth": 4
+	},
+	"mocha": {
+		"recursive": true,
+		"reporter": "spec",
+		"timeout": 5000
 	}
 }

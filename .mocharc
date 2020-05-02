@@ -1,0 +1,5 @@
+file:
+  - ./test/setup-database.js
+recursive: true
+reporter: spec
+timeout: 5000
