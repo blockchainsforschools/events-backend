@@ -4,6 +4,10 @@ const bcrypt = require("bcrypt");
 const {Users} = require("../../database/models");
 
 router.post("/", async (req, res) => {
+	if (!req.body.email || !req.body.password) {
+		throw new RefusalError("Not all required POST body information was provided.", "INCOMPLETE_BODY");
+	}
+
 	const findUser = await Users.findOne({
 		where: {
 			email: req.body.email
