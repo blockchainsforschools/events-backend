@@ -24,3 +24,23 @@ describe("POST /api/locations/create", function () {
             });
     });
 });
+
+describe("POST /api/locations/create", function () {
+    const location = {
+        address: "345 Chambers Street",
+        zip: 10282,
+        city: "New York",
+        state: "NY",
+    };
+    it("incomplete body responds with 403", function (done) {
+        supertest(app)
+            .post("/api/locations/create")
+            .send(location)
+            .set("Accept", "application", /json/)
+            .expect(403)
+            .end(function (err, res) {
+                if (err) return done(err);
+                return done();
+            });
+    });
+});
