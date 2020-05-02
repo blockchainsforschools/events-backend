@@ -1,10 +1,20 @@
 const router = require("express").Router();
-const {Locations} = require("../../database/models");
+const { Locations } = require("../../database/models");
 const RefusalError = require("./../../utils/refusalerror");
 
 router.post("/", async (req, res) => {
-	if (!req.body.name || !req.body.address || !req.body.zip || !req.body.city || !req.body.state ) {
-		throw new RefusalError("Not all required POST body information was provided.", "INCOMPLETE_BODY");
+	const allFieldsProvided =
+		req.body.name &&
+		req.body.address &&
+		req.body.zip &&
+		req.body.city &&
+		req.body.state;
+
+	if (!allFieldsProvided) {
+		throw new RefusalError(
+			"Not all required POST body information was provided.",
+			"INCOMPLETE_BODY"
+		);
 	}
 
 	const location = await Locations.create({
@@ -12,15 +22,13 @@ router.post("/", async (req, res) => {
 		address: req.body.address,
 		zip: req.body.zip,
 		city: req.body.city,
-		state: req.body.state,
+		state: req.body.state
 	});
-
 
 	return res.json({
 		success: true,
-		payload: location,
+		payload: location
 	});
-
 });
 
 module.exports = router;

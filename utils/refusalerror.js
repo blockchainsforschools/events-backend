@@ -1,5 +1,4 @@
 class Refusalerror extends Error {
-
 	constructor(message, code) {
 		super(message);
 
@@ -7,7 +6,6 @@ class Refusalerror extends Error {
 		this.name = "RefusalError";
 		this.code = code;
 	}
-
 }
 
 module.exports = Refusalerror;

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = {
 	up: (queryInterface, Sequelize) => {
@@ -20,6 +20,10 @@ module.exports = {
 		  Example:
 		  return queryInterface.dropTable('users');
 		*/
-		return queryInterface.addColumn("Events", "locationID", Sequelize.INTEGER);
+		return queryInterface.addColumn(
+			"Events",
+			"locationID",
+			Sequelize.INTEGER
+		);
 	}
 };
