@@ -1,7 +1,9 @@
 const path = require("path");
 module.exports = {
 	development: {
-		url: process.env.SEQUELIZE_URL || `sqlite::${path.resolve("./../app.db")}` ,
+		url:
+			process.env.SEQUELIZE_URL ||
+			`sqlite::${path.resolve(__dirname, "./../app.db")}`,
 		define: {
 			charset: "utf8",
 			collate: "utf8_general_ci"
