@@ -27,18 +27,19 @@ describe("POST /api/events/create", function () {
 				return done();
 			});
 	});
-	const brokenEvent1 = {
-		name: "Blockchains4Hacks 2020",
-		startTime: "hello",
-		endTime: "hello",
-		tags: ["hackathon", "microsoft"],
-		imgURL:
-			"https://c.s-microsoft.com/en-us/CMSImages/NYC_flagship_storefront.jpg?version=8db9b1ce-5625-4986-b31d-36112d9160f2"
-	};
+
 	it("responds with a 403 success false when the request body is complete but the dates are invalid", done => {
+		const brokenEvent = {
+			name: "Blockchains4Hacks 2020",
+			startTime: "hello",
+			endTime: "hello",
+			tags: ["hackathon", "microsoft"],
+			imgURL:
+				"https://c.s-microsoft.com/en-us/CMSImages/NYC_flagship_storefront.jpg?version=8db9b1ce-5625-4986-b31d-36112d9160f2"
+		};
 		supertest(app)
 			.post("api/events/create")
-			.send(brokenEvent1)
+			.send(brokenEvent)
 			.set("Accept", "application", /json/)
 			.expect("Content-Type", /json/)
 			.expect(403)
@@ -49,19 +50,21 @@ describe("POST /api/events/create", function () {
 				if (err) return done(err);
 				return done();
 			});
-    });
-    const brokenEvent1 = {
-		name: "Blockchains4Hacks 2020",
-		startTime: "hello",
-		endTime: "hello",
-		tags: {"hello": "world"},
-		imgURL:
-			"https://c.s-microsoft.com/en-us/CMSImages/NYC_flagship_storefront.jpg?version=8db9b1ce-5625-4986-b31d-36112d9160f2"
-	};
+	});
+
 	it("responds with a 403 success false when the request body is complete but the tags param does not contain an array", done => {
+		const brokenEvent = {
+			name: "Blockchains4Hacks 2020",
+			startTime: "hello",
+			endTime: "hello",
+			tags: { hello: "world" },
+			imgURL:
+				"https://c.s-microsoft.com/en-us/CMSImages/NYC_flagship_storefront.jpg?version=8db9b1ce-5625-4986-b31d-36112d9160f2"
+		};
+
 		supertest(app)
 			.post("api/events/create")
-			.send(brokenEvent1)
+			.send(brokenEvent)
 			.set("Accept", "application", /json/)
 			.expect("Content-Type", /json/)
 			.expect(403)
