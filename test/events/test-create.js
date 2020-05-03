@@ -47,8 +47,10 @@ describe("POST /api/events/create", function () {
 				assert.strictEqual(res.body.success, false);
 			})
 			.end(function (err, res) {
-				if (err) return done(err);
-				return done();
+				if (err) {
+					console.log(err);
+				}
+				done();
 			});
 	});
 
