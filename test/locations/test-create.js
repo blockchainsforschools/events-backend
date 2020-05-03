@@ -20,10 +20,7 @@ describe("POST /api/locations/create", function () {
 				assert.strictEqual(res.body.success, true);
 			})
 			.end(function (err, res) {
-				if (err) {
-					console.log(err);
-				}
-				return done();
+				done(err);
 			});
 	});
 	const location2 = {
@@ -40,10 +37,7 @@ describe("POST /api/locations/create", function () {
 				assert.strictEqual(res.body.success, false);
 			})
 			.end(function (err, res) {
-				if (err) {
-					console.log(err);
-				}
-				done();
+				done(err);
 			});
 	});
 });

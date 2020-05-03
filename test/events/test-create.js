@@ -21,10 +21,7 @@ describe("POST /api/events/create", function () {
 				assert.strictEqual(res.body.success, true);
 			})
 			.end(function (err, res) {
-				if (err) {
-					console.log(err);
-				}
-				return done();
+				done(err);
 			});
 	});
 
@@ -38,7 +35,7 @@ describe("POST /api/events/create", function () {
 				"https://c.s-microsoft.com/en-us/CMSImages/NYC_flagship_storefront.jpg?version=8db9b1ce-5625-4986-b31d-36112d9160f2"
 		};
 		supertest(app)
-			.post("api/events/create")
+			.post("/api/events/create")
 			.send(brokenEvent)
 			.set("Accept", "application", /json/)
 			.expect("Content-Type", /json/)
@@ -47,10 +44,7 @@ describe("POST /api/events/create", function () {
 				assert.strictEqual(res.body.success, false);
 			})
 			.end(function (err, res) {
-				if (err) {
-					console.log(err);
-				}
-				done();
+				done(err);
 			});
 	});
 
@@ -65,7 +59,7 @@ describe("POST /api/events/create", function () {
 		};
 
 		supertest(app)
-			.post("api/events/create")
+			.post("/api/events/create")
 			.send(brokenEvent)
 			.set("Accept", "application", /json/)
 			.expect("Content-Type", /json/)
@@ -74,8 +68,7 @@ describe("POST /api/events/create", function () {
 				assert.strictEqual(res.body.success, false);
 			})
 			.end(function (err, res) {
-				if (err) return done(err);
-				return done();
+				done(err);
 			});
 	});
 	// it("should throw a RefusalError if the URL already exists for another event", done => {

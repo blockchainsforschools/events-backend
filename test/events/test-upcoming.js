@@ -13,10 +13,7 @@ describe("GET /api/events/upcoming", () => {
 				assert.strictEqual(res.body.success, true);
 			})
 			.end((err, res) => {
-				if (err) {
-					console.log(err);
-				}
-				done();
+				done(err);
 			});
 	});
 });
