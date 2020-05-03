@@ -1,10 +1,10 @@
 const cp = require("child_process");
 
-before(async () => {
-	await cp.exec("npx sequelize db:migrate");
-	await cp.exec("npx sequelize db:seed:all");
+before(() => {
+	cp.execSync("npx sequelize db:migrate");
+	cp.execSync("npx sequelize db:seed:all");
 });
 
-after(async () => {
-	await cp.exec("npx sequelize db:seed:undo:all");
+after(() => {
+	cp.execSync("npx sequelize db:seed:undo:all");
 });

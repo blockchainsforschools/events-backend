@@ -11,10 +11,10 @@ module.exports = {
 			description: {
 				type: Sequelize.STRING
 			},
-			streetaddress: {
+			address: {
 				type: Sequelize.STRING
 			},
-			zipcode: {
+			zip: {
 				type: Sequelize.INTEGER
 			},
 			city: {

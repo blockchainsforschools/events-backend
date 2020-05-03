@@ -6,14 +6,15 @@ module.exports = (sequelize, DataTypes) => {
 			name: DataTypes.STRING,
 			eventURL: DataTypes.STRING,
 			startTime: DataTypes.DATE,
-			endtime: DataTypes.DATE,
+			endTime: DataTypes.DATE,
 			imgURL: DataTypes.STRING
 		},
 		{}
 	);
 	Events.associate = function (models) {
 		// associations can be defined here
-		Events.belongsTo(models.Locations, {
+
+		Events.belongsToMany(models.Locations, {
 			through: models.EventLocations,
 			foreignKey: "eventID"
 		});

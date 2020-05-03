@@ -6,7 +6,7 @@ router.get("/", async (req, res) => {
 
 	const queryWords = query.split(" ").filter(Boolean);
 
-	const fields = ["name", "streetaddress", "zipcode", "city", "state"];
+	const fields = ["name", "address", "zip", "city", "state"];
 
 	const op = Sequelize.Op;
 

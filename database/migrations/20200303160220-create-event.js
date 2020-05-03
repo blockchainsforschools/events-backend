@@ -20,7 +20,7 @@ module.exports = {
 			startTime: {
 				type: Sequelize.DATE
 			},
-			endtime: {
+			endTime: {
 				type: Sequelize.DATE
 			},
 			imgURL: {

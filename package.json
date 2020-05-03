@@ -48,10 +48,5 @@
 		"trailingComma": "none",
 		"useTabs": true,
 		"tabWidth": 4
-	},
-	"mocha": {
-		"recursive": true,
-		"reporter": "spec",
-		"timeout": 5000
 	}
 }

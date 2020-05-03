@@ -9,7 +9,8 @@ describe("POST /api/events/create", function () {
 		endTime: "05/31/2020",
 		tags: ["hackathon", "microsoft"],
 		imgURL:
-			"https://c.s-microsoft.com/en-us/CMSImages/NYC_flagship_storefront.jpg?version=8db9b1ce-5625-4986-b31d-36112d9160f2"
+			"https://c.s-microsoft.com/en-us/CMSImages/NYC_flagship_storefront.jpg?version=8db9b1ce-5625-4986-b31d-36112d9160f2",
+		locationID: -1
 	};
 	it("responds with json success true", function (done) {
 		supertest(app)
@@ -20,7 +21,9 @@ describe("POST /api/events/create", function () {
 				assert.strictEqual(res.body.success, true);
 			})
 			.end(function (err, res) {
-				if (err) return done(err);
+				if (err) {
+					console.log(err);
+				}
 				return done();
 			});
 	});

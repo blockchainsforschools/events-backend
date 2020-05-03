@@ -4,8 +4,8 @@ const assert = require("assert");
 
 describe("POST /api/auth/login", function () {
 	const user1 = {
-		email: "johndoe@gmail.com",
-		password: "correct"
+		email: "user@gmail.com",
+		password: "password"
 	};
 	it("complete body with valid email and correct password responds with 200 success true", function (done) {
 		supertest(app)

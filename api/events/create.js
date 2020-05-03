@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
 	const eventURL = req.body.url || "";
 	const startTime = new Date(req.body.startTime);
 	const endTime = new Date(req.body.endTime);
-	const locationID = req.body.locationID || "";
+	const locationID = Number(req.body.locationID);
 	const tags = req.body.tags;
 	const imgURL = req.body.image;
 
@@ -38,7 +38,16 @@ router.post("/", async (req, res) => {
 		);
 	}
 
-	const locationExists = await Locations.count({ where: { id: locationID } });
+	if (isNaN(locationID)) {
+		throw new RefusalError(
+			"No valid location was provided.",
+			"INVALID_LOCATION"
+		);
+	}
+
+	const locationExists = await Locations.count({
+		where: { id: locationID }
+	});
 
 	if (!locationExists) {
 		throw new RefusalError(
