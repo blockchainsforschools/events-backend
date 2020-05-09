@@ -30,6 +30,7 @@
 	"scripts": {
 		"test": "mocha",
 		"start": "node index.js",
+		"build": "npx sequelize db:migrate",
 		"dev": "npx nodemon index.js"
 	},
 	"repository": {
