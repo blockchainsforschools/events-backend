@@ -9,11 +9,13 @@
 		"connect-session-sequelize": "^6.1.1",
 		"cookie-parser": "^1.4.5",
 		"cors": "^2.8.5",
+		"coveralls": "^3.1.0",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
 		"express-async-errors": "^3.1.1",
 		"express-session": "^1.17.1",
 		"google-auth-library": "^6.0.0",
+		"nyc": "^15.0.1",
 		"pg": "^8.0.3",
 		"pg-native": "^3.0.0",
 		"sequelize": "^5.21.7"
@@ -28,10 +30,11 @@
 		"supertest": "^4.0.2"
 	},
 	"scripts": {
-		"test": "mocha",
 		"start": "node index.js",
 		"build": "npx sequelize db:migrate",
-		"dev": "npx nodemon index.js"
+		"dev": "npx nodemon index.js",
+		"test": "nyc mocha",
+		"coverage": "nyc report --reporter=text-lcov | coveralls"
 	},
 	"repository": {
 		"type": "git",
