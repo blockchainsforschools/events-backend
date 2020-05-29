@@ -79,6 +79,7 @@ jobs:
                       - run: npm install sqlite3
                       - run: npm run build
                       - run: npm test
+                      - run: npm run coverage
 workflows:
     build-and-test:
         jobs:
