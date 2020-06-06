@@ -5,6 +5,7 @@ router.use(require("./cors"));
 router.use("/auth", require("./auth"));
 router.use("/events", require("./events"));
 router.use("/locations", require("./locations"));
+router.use("/posts", require("./posts"));
 
 // Custom error handler for /api route
 router.use((err, req, res, next) => {
