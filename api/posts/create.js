@@ -22,3 +22,5 @@ router.post("/", async (req, res) => {
 		payload: post
 	});
 });
+
+module.exports = router;
