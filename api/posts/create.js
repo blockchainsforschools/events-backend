@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { Posts } = require("../../database/models/posts");
+const { Posts } = require("../../database/models");
+const RefusalError = require("./../../utils/refusalerror");
 
 router.post("/", async (req, res) => {
 	const { title, content } = req.body;
@@ -17,7 +18,7 @@ router.post("/", async (req, res) => {
 		content
 	});
 
-	res.status(201).json({
+	res.json({
 		success: true,
 		payload: post
 	});
