@@ -25,7 +25,7 @@ describe("POST /api/events/create", function () {
 			});
 	});
 
-	it("responds with a 403 success false when the request body is complete but the dates are invalid", done => {
+	it("responds with a 403 success false when the request body is complete but the dates are invalid", (done) => {
 		const brokenEvent = {
 			name: "Blockchains4Hacks 2020",
 			startTime: "hello",
@@ -48,7 +48,7 @@ describe("POST /api/events/create", function () {
 			});
 	});
 
-	it("responds with a 403 success false when the request body is complete but the tags param does not contain an array", done => {
+	it("responds with a 403 success false when the request body is complete but the tags param does not contain an array", (done) => {
 		const brokenEvent = {
 			name: "Blockchains4Hacks 2020",
 			startTime: "hello",

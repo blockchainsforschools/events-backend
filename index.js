@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === "production") {
 			cluster.fork();
 		}
 
-		cluster.on("exit", worker => {
+		cluster.on("exit", (worker) => {
 			// Restart the dead process
 			console.log(`Worker ${worker.id} died. Restarting...`);
 			cluster.fork();

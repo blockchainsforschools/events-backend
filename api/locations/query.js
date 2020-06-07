@@ -12,10 +12,10 @@ router.get("/", async (req, res) => {
 
 	// Create dynamic AND queries
 	// Find rows where any field contains any of the words in the query
-	const ANDConditions = queryWords.map(word => {
+	const ANDConditions = queryWords.map((word) => {
 		const wildcard = `%${word}%`;
 		return {
-			[op.or]: fields.map(field => ({
+			[op.or]: fields.map((field) => ({
 				[field]: {
 					[op.like]: wildcard
 				}
