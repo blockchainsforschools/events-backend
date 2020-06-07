@@ -3,7 +3,7 @@ const { Posts } = require("../../database/models");
 
 router.get("/", async (req, res) => {
 	const posts = await Posts.findAll({
-		order: [["created_at", "DESC"]]
+		order: [["createdAt", "DESC"]]
 	});
 
 	res.json({
