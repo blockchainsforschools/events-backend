@@ -1,0 +1,4 @@
+restylers:
+  - name: prettier
+    include:
+      - '**/*.js'
