@@ -1,4 +1,4 @@
 restylers:
-  - name: prettier
-    include:
-      - '**/*.js'
+    - name: prettier
+      include:
+          - "**/*.js"

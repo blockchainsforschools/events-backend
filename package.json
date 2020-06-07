@@ -45,12 +45,5 @@
 	"bugs": {
 		"url": "https://github.com/blockchainsforschools/events-backend/issues"
 	},
-	"homepage": "https://github.com/blockchainsforschools/events-backend#readme",
-	"prettier": {
-		"printWidth": 80,
-		"arrowParens": "avoid",
-		"trailingComma": "none",
-		"useTabs": true,
-		"tabWidth": 4
-	}
+	"homepage": "https://github.com/blockchainsforschools/events-backend#readme"
 }
