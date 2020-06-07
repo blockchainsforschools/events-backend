@@ -1,4 +1,4 @@
-class Refusalerror extends Error {
+class RefusalError extends Error {
 	constructor(message, code) {
 		super(message);
 
@@ -8,4 +8,4 @@ class Refusalerror extends Error {
 	}
 }
 
-module.exports = Refusalerror;
+module.exports = RefusalError;
