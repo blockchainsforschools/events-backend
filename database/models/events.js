@@ -20,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
 		});
 
 		Events.hasMany(models.Tags, { foreignKey: "eventID" });
+		// an event can be updated multiple times
+		Events.hasMany(models.Updates, { foreignKey: "eventID" });
 	};
 	return Events;
 };
