@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Updates } = require("../../database/models/updates");
 
-router.get("/:userID", async (req, res) => {
+router.get("/", async (req, res) => {
 	const requestUpdateID = req.params.userID;
 	let update;
 	if (userID) {

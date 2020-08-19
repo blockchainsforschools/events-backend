@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 	Updates.associate = function (models) {
     // associations can be defined here
     // an update can belong to only one user
-		Updates.belongsTo(models.User, {
+		Updates.belongsTo(models.Users, {
 			foreignKey: "userID",
 			targetKey: "id"
 		});
