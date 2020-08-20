@@ -21,3 +21,5 @@ router.get("/", async (req, res) => {
 		payload: update
 	});
 });
+
+module.exports = router;
