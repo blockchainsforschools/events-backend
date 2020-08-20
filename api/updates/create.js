@@ -1,4 +1,4 @@
-const router = require("express").Router();
+const router = require("express").Router({ mergeParams: true });
 const { Updates } = require("../../database/models/updates");
 const RefusalError = require("./../../utils/refusalerror");
 
