@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-	const cloudinaryImages = sequelize.define(
-		"cloudinaryImages",
+	const images = sequelize.define(
+		"images",
 		{
 			publicId: DataTypes.STRING,
 			width: DataTypes.INTEGER,
@@ -11,13 +11,9 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		{}
 	);
-	cloudinaryImages.associate = function (models) {
+	images.associate = function (models) {
 		// associations can be defined here
-
-		cloudinaryImages.belongsToMany(models.events, {
-			through: models.eventImages,
-			foreignKey: "imageId"
-		});
+		images.belongsToMany(models.events, { through: models.eventImages });
 	};
-	return cloudinaryImages;
+	return images;
 };

@@ -11,9 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 	);
 	eventImages.associate = function (models) {
 		// associations can be defined here
-		eventImages.belongsTo(models.cloudinaryImages, {
-			foreignKey: "imageId"
-		});
+		eventImages.belongsTo(models.images);
 
 		eventImages.belongsTo(models.events);
 	};

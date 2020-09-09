@@ -1,10 +1,15 @@
 const { gql } = require("apollo-server-express");
 
 module.exports = gql`
-	type CloudinaryImage {
+	type Image {
+		id: Int!
 		publicId: String!
-		defaultUrl: String
 		width: Int
 		height: Int
+		description: String
+		mimetype: String
+
+		# This is generated on the fly
+		defaultUrl: String
 	}
 `;

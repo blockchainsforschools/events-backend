@@ -9,8 +9,8 @@ module.exports = gql`
 		end: DateTime
 
 		# Properties that need custom resolvers
-		images: [CloudinaryImage]
-		defaultImage: CloudinaryImage
+		images: [Image]
+		defaultImage: Image
 		location: Location
 	}
 `;

@@ -17,9 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 			through: models.eventLocations
 		});
 		events.belongsToMany(models.tags, { through: models.eventTags });
-		events.belongsToMany(models.cloudinaryImages, {
-			through: models.eventImages
-		});
+		events.belongsToMany(models.images, { through: models.eventImages });
 	};
 	return events;
 };
