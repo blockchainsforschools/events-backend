@@ -1,14 +1,12 @@
-import { gql } from "apollo-server-express";
+const { gql } = require("apollo-server-express");
 
-const Location = gql`
+module.exports = gql`
 	type Location {
-        # DB Fields
-		name: String!
-		address: String!
-		zip: Int!
-		city: String!
-		state: String!
+		id: Int!
+		name: String
+		address: String
+		zip: Int
+		city: String
+		state: String
 	}
 `;
-
-export default Location;

@@ -1,28 +1,25 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-	const Updates = sequelize.define(
-		"Updates",
+	const updates = sequelize.define(
+		"updates",
 		{
-			userID: DataTypes.INTEGER,
-			eventID: DataTypes.INTEGER,
+			submittingUserId: DataTypes.STRING,
+			eventId: DataTypes.INTEGER,
 			title: DataTypes.STRING,
-			content: DataTypes.STRING
+			content: DataTypes.TEXT,
+			showHome: DataTypes.BOOLEAN,
+			pinned: DataTypes.BOOLEAN
 		},
 		{}
 	);
-	Updates.associate = function (models) {
+	updates.associate = function (models) {
 		// associations can be defined here
-		// an update can belong to only one user
-		Updates.belongsTo(models.Users, {
-			foreignKey: "userID",
-			targetKey: "id"
+		updates.belongsTo(models.users, {
+			foreignKey: "submittingUserId",
+			as: "submittingUser"
 		});
 
-		// an update can only be referenced to its parent event
-		Updates.belongsTo(models.Events, {
-			foreignKey: "eventID",
-			targetKey: "id"
-		});
+		updates.belongsTo(models.events);
 	};
-	return Updates;
+	return updates;
 };

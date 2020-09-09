@@ -1,15 +1,17 @@
-import { gql } from "apollo-server-express";
+const { gql } = require("apollo-server-express");
 
-const Event = gql`
-    # Date is a custom type that will be resolved through the GraphQLDate object.
-	scalar Date
-    # DB Fields
+module.exports = gql`
 	type Event {
-		name: String!
-		eventURL: String!
-		startTime: Date!
-		endTime: Date!
-		imgUrl: String!
+		id: Int!
+		name: String
+		url: String
+		start: DateTime
+		end: DateTime
+
+		# Properties that need custom resolvers
+		images: [CloudinaryImage]
+		defaultImage: CloudinaryImage
+		location: Location
 	}
 `;
 

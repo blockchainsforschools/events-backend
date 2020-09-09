@@ -1,9 +1,10 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-	const Locations = sequelize.define(
-		"Locations",
+	const locations = sequelize.define(
+		"locations",
 		{
-			name: DataTypes.STRING,
+			title: DataTypes.STRING,
+			description: DataTypes.TEXt,
 			address: DataTypes.STRING,
 			zip: DataTypes.INTEGER,
 			city: DataTypes.STRING,
@@ -11,12 +12,10 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		{}
 	);
-	Locations.associate = function (models) {
-		// associations can be defined here
-		Locations.belongsToMany(models.Events, {
-			through: models.EventLocations,
-			foreignKey: "locationID"
+	locations.associate = function (models) {
+		locations.belongsToMany(models.events, {
+			through: models.eventLocations
 		});
 	};
-	return Locations;
+	return locations;
 };

@@ -1,19 +1,17 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-	const Tags = sequelize.define(
-		"Tags",
+	const tags = sequelize.define(
+		"tags",
 		{
-			eventID: DataTypes.INTEGER,
-			tag: DataTypes.STRING
+			url: DataTypes.STRING,
+			title: DataTypes.STRING,
+			description: DataTypes.TEXT
 		},
 		{}
 	);
-	Tags.associate = function (models) {
+	tags.associate = function (models) {
 		// associations can be defined here
-		Tags.belongsTo(models.Events, {
-			foreignKey: "eventID",
-			targetKey: "id"
-		});
+		tags.belongsToMany(models.events, { through: models.eventTags });
 	};
-	return Tags;
+	return tags;
 };

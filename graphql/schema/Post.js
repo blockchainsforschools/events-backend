@@ -1,11 +1,10 @@
-import { gql } from 'apollo-server-express';
+const { gql } = require("apollo-server-express");
 
-const Post = gql`
-    type Post {
-        # DB Fields
-        title: String!
-        content: String!
-    }
+module.exports = gql`
+	type Post {
+		id: Int!
+		title: String
+		content: String
+		createdAt: DateTime
+	}
 `;
-
-export default Post;
