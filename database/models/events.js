@@ -1,27 +1,23 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-	const Events = sequelize.define(
-		"Events",
+	const events = sequelize.define(
+		"events",
 		{
 			name: DataTypes.STRING,
-			eventURL: DataTypes.STRING,
-			startTime: DataTypes.DATE,
-			endTime: DataTypes.DATE,
-			imgURL: DataTypes.STRING
+			url: DataTypes.STRING,
+			description: DataTypes.TEXT,
+			start: DataTypes.DATE,
+			end: DataTypes.DATE
 		},
 		{}
 	);
-	Events.associate = function (models) {
+	events.associate = function (models) {
 		// associations can be defined here
-
-		Events.belongsToMany(models.Locations, {
-			through: models.EventLocations,
-			foreignKey: "eventID"
+		events.belongsToMany(models.locations, {
+			through: models.eventLocations
 		});
-
-		Events.hasMany(models.Tags, { foreignKey: "eventID" });
-		// an event can be updated multiple times
-		Events.hasMany(models.Updates, { foreignKey: "eventID" });
+		events.belongsToMany(models.tags, { through: models.eventTags });
+		events.belongsToMany(models.images, { through: models.eventImages });
 	};
-	return Events;
+	return events;
 };
