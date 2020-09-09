@@ -1,1 +1,1 @@
-exports = require("./models");
+module.exports = require("./models");

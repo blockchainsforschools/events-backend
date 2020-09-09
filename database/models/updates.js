@@ -14,11 +14,6 @@ module.exports = (sequelize, DataTypes) => {
 	);
 	updates.associate = function (models) {
 		// associations can be defined here
-		updates.belongsTo(models.users, {
-			foreignKey: "submittingUserId",
-			as: "submittingUser"
-		});
-
 		updates.belongsTo(models.events);
 	};
 	return updates;

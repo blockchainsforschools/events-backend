@@ -1,7 +1,7 @@
 const { verify } = require("jsonwebtoken");
 const { COOKIE_SECRET } = require("./../constants");
 
-exports = async (req, res, next) => {
+module.exports = async (req, res, next) => {
 	let token =
 		req.cookies["auth-jwt"] ||
 		req.headers["x-access-token"] ||
