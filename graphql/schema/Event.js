@@ -14,5 +14,3 @@ module.exports = gql`
 		location: Location
 	}
 `;
-
-export default Event;
